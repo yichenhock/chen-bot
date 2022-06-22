@@ -1,7 +1,7 @@
 {
-  "name": "artfolbot",
+  "name": "chen-bot",
   "version": "1.0.0",
-  "description": "Discord Bot for Artfol server",
+  "description": "Discord Bot for Chen server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,13 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Artfol/artfolbot.git"
+    "url": "git+https://github.com/yichenhock/chen-bot.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Artfol/artfolbot/issues"
-  },
   "homepage": "https://github.com/Artfol/artfolbot#readme",
   "dependencies": {
     "ansi-colors": "^4.1.1",

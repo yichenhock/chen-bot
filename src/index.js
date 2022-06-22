@@ -1,7 +1,14 @@
-require('dotenv').config();
+require('dotenv').config({
+  path: '../.env'
+});
 
 const discord = require('discord.js');
-const client = new discord.Client({ partials: ['MESSAGE', 'REACTION']});
+const client = new discord.Client(); //
+
+client.once('ready', ()=> {
+  console.log('reeeeadddyy! :D');
+});
+
 client.login(process.env.BOT_TOKEN);
 
 client.on('messageReactionAdd', async (reaction, user) => {

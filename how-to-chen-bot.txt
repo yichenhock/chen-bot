@@ -1,0 +1,33 @@
+https://github.com/yichenhock/chen-bot
+
+---
+
+Filezila:
+
+File -> Site Manager -> chen-bot -> Connect
+
+(add pem/ppk key)
+
+Edit -> Settings -> SFTP -> Add/Remove Key
+
+---
+
+AWS:
+
+https://us-east-1.console.aws.amazon.com/ec2/v2/home?region=us-east-1#InstanceDetails:instanceId=i-069e6a963a54edd4f
+
+---
+
+In terminal:
+
+ssh -i "chen_bot_key.pem" ec2-user@ec2-54-157-193-96.compute-1.amazonaws.com
+
+cd src (or user src/index.js)
+
+pm2 start index.js
+
+pm2 log
+
+pm2 restart all / pm2 reload all
+
+pm2 stop all
