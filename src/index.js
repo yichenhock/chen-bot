@@ -2,77 +2,32 @@ require('dotenv').config({
   path: '../.env'
 });
 
-const discord = require('discord.js');
-const client = new discord.Client(); //
+//const discord = require('discord.js');
+
+const { Client, Intents } = require("discord.js");
+const client = new Client({ 
+  intents: [
+    Intents.FLAGS.GUILDS, 
+    Intents.FLAGS.GUILD_MESSAGES
+  ] 
+});
+
+client.login(process.env.BOT_TOKEN).then((token) => {
+  client.user.setActivity('being talented', {
+    type: 'PLAYING', 
+  });
+});
+
+
 
 client.once('ready', ()=> {
-  console.log('reeeeadddyy! :D');
+  console.log(new Date() + ' Chen Bot has started!');
 });
 
-client.login(process.env.BOT_TOKEN);
-
-client.on('messageReactionAdd', async (reaction, user) => {
-  let applyRole = async () => {
-    let emojiName = reaction.emoji.name;
-    console.log(emojiName);
-    let role = reaction.message.guild.roles.cache.find(role =>
-      emojiName === 'android' ? role.name === 'Android' : role.name === 'iOS');
-    let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
-    console.log(role);
-    try {
-      if(role && member) {
-        await member.roles.add(role);
-      }
-    } catch(err) {
-      console.log(err);
-    }
-  }
-  if(reaction.message.partial) {
-    try {
-      let msg = await reaction.message.fetch();
-      if(msg.id === '733475327661047889') {
-        applyRole();
-      }
-    } catch(err) {
-      console.log(err);
-    }
-  } else {
-    if(reaction.message.id === '733475327661047889') {
-      console.log(true);
-      applyRole();
-    }
+client.on("messageCreate", async message => {
+  console.log(new Date() + ' Message sent: ' + message)
+  if (message.mentions.users.first().id === '501077051017789451' || message.mentions.users.first().id === '232163406621179905'){
+    message.channel.send('Chen is sleeping');
   }
 });
 
-client.on('messageReactionRemove', async (reaction, user) => {
-        let removeRole = async () => {
-          let emojiName = reaction.emoji.name;
-          console.log(emojiName);
-          let role = reaction.message.guild.roles.cache.find(role =>
-            emojiName === 'android' ? role.name === 'Android' : role.name === 'iOS');
-          let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
-          console.log(role);
-          try {
-            if(role && member) {
-              await member.roles.remove(role);
-            }
-          } catch(err) {
-            console.log(err);
-          }
-        }
-        if(reaction.message.partial) {
-          try {
-            let msg = await reaction.message.fetch();
-            if(msg.id === '733475327661047889') {
-              removeRole();
-            }
-          } catch(err) {
-            console.log(err);
-          }
-        } else {
-          if(reaction.message.id === '733475327661047889') {
-            console.log(true);
-            removeRole();
-          }
-        }
-});
